@@ -4,7 +4,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
-
 import Classes.Reservation;
 
 public class appHotel {
@@ -22,6 +21,7 @@ public class appHotel {
 		System.out.print("Check-out date (dd/MM/yyyy");
 		Date checkOut = sdf.parse(sc.next());
 		if(!checkOut.after(checkIn)) {
+			 
 			System.out.println("Error in reservation: Check-out date must be after check in date");
 			
 		}else {
@@ -35,24 +35,21 @@ public class appHotel {
 			System.out.print("Check-out date (dd/MM/yyyy");
 			checkOut = sdf.parse(sc.next());
 			
-			Date now  = new Date();
+			String error = reservation.updateDates(checkIn, checkOut);
 			
-			if(checkIn.before(now) || checkOut.before(now)) {
-				System.out.println("Error in reservation: Reservation date for update must be future ");
-			}else if(!checkOut.after(checkIn)) {
+			if(error != null) {
 				
-				System.out.println("Error in reservation: Check-out date must be after check in date");
+				System.out.println("Error in reservation: " + error);
 				
 			}else {
-				reservation.updateDATES(checkIn, checkOut);
+				
 				System.out.println("Reservation: " + reservation);
 			}
+				
+				
+		
 			
-
 		}
-		
-		
-		
 		
 		sc.close();
 
